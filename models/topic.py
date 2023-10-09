@@ -1,26 +1,25 @@
-import os
-from sqla_wrapper import SQLAlchemy
 from datetime import datetime
 from models.user import User
-
-# this connects to a database either on Heroku or on localhost
-db = SQLAlchemy(os.getenv("DATABASE_URL", "sqlite:///localhost.sqlite"))
+from models.settings import db
 
 class Topic(db.Model):
     topic_id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
-    text = db.Column(db.String)
-    author_id = db.Column(db.Integer, db.ForeignKey(User.user_id))
-    author = db.relationship(User)
+    description = db.Column(db.String)
+    author_id = db.Column(db.Integer, db.ForeignKey("users.user_id")) # Note that SQLAlchemy uses plural when creating table names,
+                                                                    # that's why we added users.id in db.ForeignKey()
+    author = db.relationship("User") # not an SQL table column. It's just a field that describes
+                                    # the relationship with another model (User).
     created = db.Column(db.DateTime, default=datetime.utcnow)
 
-    @classmethod
-    def create(cls, title, text, author):
-        topic = cls(title=title, text=text, author=author)
+    @classmethod # inserts topic object in to the database
+    def create(cls, title, description, author): # cls - method belongs to the class, self - method is related to instance of the class,
+                                        # therefore method with cls is accessed by class name where as the one with self is accessed by instance of the class
+        topic = cls(title=title, description=description, author=author)
         db.add(topic)
         db.commit()
 
         return topic
 
-    def User(self):
+    def user(self):
         return User

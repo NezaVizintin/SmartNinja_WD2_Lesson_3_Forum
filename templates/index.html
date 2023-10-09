@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% block title %}Forum 9000{% endblock title %}
 
 {% block body %}
     <form method="post" action="/">
@@ -7,15 +8,15 @@
     </form>
 
     <table>
-        <th>
-            <td>Naslov</td>
-            <td>Avthor</td>
-            <td>Ustvarjeno - datum</td>
-        </th>
+        <tr>
+            <th>Naslov</th>
+            <th>Avthor</th>
+            <th>Ustvarjeno - datum</th>
+        </tr>
         {% for topic in topics %}
         <tr>
             <td>{{topic.title}}</td>
-            <td>{{topic.author.name}}</td>
+            <td>{{topic.author.username}}</td>
             <td>{{topic.created}}</td>
         </tr>
         {% endfor %}

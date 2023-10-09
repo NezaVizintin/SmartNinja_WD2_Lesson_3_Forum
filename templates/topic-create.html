@@ -1,9 +1,12 @@
 {% extends "base.html" %}
+{% block title %}Create topic{% endblock title %}
 
 {% block body %}
-    <div class="text-center">
-        <h3>Hello {% if name %} {{name}}! {% endif %}</h3>
+    <h1>Create a new topic</h1>
 
-
-    </div>
+    <form method="post">
+        <input type="text" name="title" placeholder="Topic title" required> <br>
+        <textarea name="description" rows="5" required></textarea> <br>
+        <button>Submit</button>
+    </form>
 {% endblock body %}

@@ -1,22 +1,18 @@
-import os
-
-from models.user import User, db #A MORAM VSAKIČ db? VPRAŠAJ
-from models.topic import Topic
-from models.comment import Comment
-
-#sys.path.insert(0, "D:\\Neza\\Programiranje\\SmartNinja\\Lekcija-3-forum\\models")
-
-# from models import user, topic, comment, db
-# User = user.User
 from flask import Flask, render_template, request, make_response, redirect,url_for, session
+import os
 import secrets
 import bcrypt
 import smartninja_redis
 
+from models.user import User
+from models.topic import Topic
+from models.comment import Comment
+from models.settings import db
+
 redis = smartninja_redis.from_url(os.environ.get("REDIS_URL"))
 app = Flask(__name__)
-db.create_all()
 
+db.create_all()
 
 def password_hash(password):
     salt = b'customsalt'
@@ -24,13 +20,21 @@ def password_hash(password):
 
     return password_hashed
 
+def user_get(user_token=None):
+    if not user_token:
+        user_token = user_token = request.cookies.get("session_token")
+    return db.query(User).filter_by(session_token=user_token).first()
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "GET":
-        user_name = request.cookies.get("user_name")
-        topics = db.query(Topic).all()
+        try:
+            topics = db.query(Topic).all()
+        except Exception as e:
+            print(f"Error retrieving topics: {str(e)}")
+            return render_template("index.html")
 
-        return render_template("index.html", name=user_name, topics=topics)
+        return render_template("index.html", topics=topics)
     elif request.method == "POST":
         pass
 
@@ -38,10 +42,7 @@ def index():
 ##! prevent going back after sign up (or something) because multiple threads get created and sqlite doesn't like it, same on login !##
 def sign_up():
     if request.method == "GET":
-        user_name = request.cookies.get("user_name")
-        topics = db.query(Topic).all()
-
-        return render_template("sign-up.html", name=user_name, topics=topics)
+        return render_template("sign-up.html")
     elif request.method == "POST":
     # take information from user
         input_name = request.form.get("input-name")
@@ -56,6 +57,7 @@ def sign_up():
             return "Sorry there is already a user with that name or email."
         else:
             input_password_hashed = password_hash(input_password)
+            print(f"sign_up() session token before saved: {session_token}")
 
             user = User(username=input_name, email=input_email, password_hash=input_password_hashed,
                         session_token=session_token)
@@ -71,14 +73,13 @@ def sign_up():
 
         # respond
         response = make_response(redirect(url_for("user_about")))
-        response.set_cookie("user_name", input_name)
+        response.set_cookie("session_token", session_token)
 
         return response
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "GET":
-
         return render_template("login.html")
 
     elif request.method == "POST":
@@ -86,12 +87,11 @@ def login():
         input_password = request.form.get("input-password")
 
         input_password_hashed = password_hash(input_password)
-
         user = db.query(User).filter_by(username=input_name, password_hash=input_password_hashed).first()
 
         if user and user.username == input_name and user.password_hash == input_password_hashed:
             response = make_response(redirect(url_for("user_about")))
-            response.set_cookie("user_name", input_name)
+            response.set_cookie("session_token", user.session_token)
 
             return response
         else:
@@ -100,12 +100,20 @@ def login():
 @app.route("/topic-create", methods=["GET", "POST"])
 def topic_create():
     if request.method == "GET":
+        user = user_get()
+        if not user:
+            return redirect(url_for("login"))
 
         return render_template("topic-create.html")
 
     elif request.method == "POST":
-        return
+        title = request.form.get("title")
+        description = request.form.get("description")
+        user = user_get()
 
+        topic = Topic.create(title=title, description=description, author=user)
+
+        return redirect(url_for("index"))
 @app.route("/users")
 def users():
     if request.method == "GET":
@@ -117,10 +125,11 @@ def users():
 def user_about():
     try:
         if request.method == "GET":
-            user_name = session.get("user_name")
-            response = make_response(render_template("user-about.html", name=user_name))
-            if not user_name:
+            user = user_get()
+            if not user:
                 return redirect(url_for("login"))
+
+            response = make_response(render_template("user-about.html", name=user.username))
 
             return response
     except Exception as e:
