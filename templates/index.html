@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <form method="post" action="/">
+        <textarea name="input-message">Enter your message...</textarea>
+        <button type="submit">Submit</button>
+    </form>
+
+    <table>
+        <th>
+            <td>Naslov</td>
+            <td>Avthor</td>
+            <td>Ustvarjeno - datum</td>
+        </th>
+        {% for topic in topics %}
+        <tr>
+            <td>{{topic.title}}</td>
+            <td>{{topic.author.name}}</td>
+            <td>{{topic.created}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock body %}

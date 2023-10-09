@@ -1,0 +1,4 @@
+Flask==2.0.3
+sqla-wrapper==4.200628
+argon2-cffi
+smartninja_redis
