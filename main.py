@@ -22,8 +22,14 @@ def password_hash(password):
 
 def user_get(user_token=None):
     if not user_token:
-        user_token = user_token = request.cookies.get("session_token")
+        user_token = request.cookies.get("session_token")
     return db.query(User).filter_by(session_token=user_token).first()
+
+@app.context_processor
+def context_processor():
+    user = user_get()
+    return dict(user=user)
+
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -99,8 +105,8 @@ def login():
 
 @app.route("/topic-create", methods=["GET", "POST"])
 def topic_create():
+    user = user_get()
     if request.method == "GET":
-        user = user_get()
         if not user:
             return redirect(url_for("login"))
 
@@ -109,11 +115,64 @@ def topic_create():
     elif request.method == "POST":
         title = request.form.get("title")
         description = request.form.get("description")
-        user = user_get()
 
-        topic = Topic.create(title=title, description=description, author=user)
+        Topic.create(title=title, description=description, author=user)
 
         return redirect(url_for("index"))
+
+@app.route("/topic/<topic_id>/topic-edit", methods=["GET", "POST"])
+def topic_edit(topic_id):
+    topic = db.query(Topic).get(int(topic_id))
+
+    if request.method == "GET":
+        return render_template("topic-edit.html", topic=topic)
+
+    elif request.method == "POST":
+        title = request.form.get("title")
+        description = request.form.get("description")
+
+        user = user_get()
+
+        if not user:
+            return redirect(url_for("login"))
+        elif user.user_id != topic.author_id:
+            return "You are not the author of this topic."
+        else:
+            topic.title = title
+            topic.description = description
+            db.add(topic)
+            db.commit()
+
+        return redirect(url_for("index"))
+
+@app.route("/topic/<topic_id>/topic-delete", methods=["GET", "POST"])
+def topic_delete(topic_id):
+    topic = db.query(Topic).get(int(topic_id))
+
+    if request.method == "GET":
+        return render_template("topic-delete.html", topic=topic)
+
+    elif request.method == "POST":
+        user = user_get()
+
+        if not user:
+            return redirect(url_for("login"))
+        elif user.user_id != topic.author_id:
+            return "You are not the author of this topic."
+        else:
+            db.delete(topic)
+            db.commit()
+
+        return redirect(url_for("index"))
+
+
+@app.route("/topic/<topic_id>", methods=["GET", "POST"])
+def topic_details(topic_id):
+    topic = db.query(Topic).get(int(topic_id))
+    user = user_get()
+
+    return render_template("topic-details.html", topic=topic, user=user)
+
 @app.route("/users")
 def users():
     if request.method == "GET":

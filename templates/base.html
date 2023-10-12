@@ -7,6 +7,13 @@
 </head>
 <body>
     <h1>Forum 9000</h1>
+    {% if user %}
+    <a href="/user-about" type="button">{{user.username}}</a>
+    {% else %}
+    <a href="/login" type="button">Login</a>
+    <a href="/sign-up" type="button">Sign up</a>
+    {% endif %}
+
     {% block body %}{% endblock body %}
 </body>
 </html>

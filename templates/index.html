@@ -1,21 +1,17 @@
 {% extends "base.html" %}
+
 {% block title %}Forum 9000{% endblock title %}
 
 {% block body %}
-    <form method="post" action="/">
-        <textarea name="input-message">Enter your message...</textarea>
-        <button type="submit">Submit</button>
-    </form>
-
     <table>
         <tr>
             <th>Naslov</th>
             <th>Avthor</th>
-            <th>Ustvarjeno - datum</th>
+            <th>Datum</th>
         </tr>
         {% for topic in topics %}
         <tr>
-            <td>{{topic.title}}</td>
+            <td><a href="/topic/{{topic.topic_id}}">{{topic.title}}</a></td>
             <td>{{topic.author.username}}</td>
             <td>{{topic.created}}</td>
         </tr>

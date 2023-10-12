@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}{{ topic.title }}{% endblock title %}
+
+{% block body %}
+    <h1>{{ topic.title }}</h1>
+
+  <!--  The program below converts a datetime object containing current date and time to different string formats-->
+    <small>Posted by {{ topic.author.username }} on {{ topic.created_at.strftime('%d %b %Y') }}</small>
+
+    <!-- Edit or delete topic -->
+    {% if user and user.id == topic.author.id %}
+        <p>
+            <a href="/topic/{{topic.topic_id}}/topic-edit">Edit</a> |
+            <a href="/topic/{{topic.topic_id}}/topic-delete">Delete</a>
+        </p>
+    {% endif %}
+
+    <p>{{ topic.description }}</p>
+
+    <form method="post" action="/message-create">
+        <textarea name="input-message">Enter your message...</textarea>
+        <button type="submit">Submit</button>
+    </form>
+{% endblock body %}

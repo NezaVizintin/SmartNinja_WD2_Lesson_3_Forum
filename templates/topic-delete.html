@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Delete topic{% endblock title %}
+
+{% block body %}
+  <h1>Are you rure you want to delete topic: {{ topic.title }}?</h1>
+
+    <button name="no" onclick="history.go(-2)">No</button>
+
+    <form action="/topic/<topic_id>/topic-delete">
+      <button name="yes" type="submit">Yes</button>
+    </form>
+
+{% endblock body %}
