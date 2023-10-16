@@ -1,3 +1,7 @@
-.text-center {
-    text-align: center;
+.text-red {
+    color: red;
+}
+
+.btn-sm.round {
+	border-radius: 10px;
 }

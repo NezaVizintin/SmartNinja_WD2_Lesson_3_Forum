@@ -7,6 +7,7 @@
     <form method="post">
         <input type="text" name="title" placeholder="Topic title" required> <br>
         <textarea name="description" rows="5" required></textarea> <br>
+        <input type="hidden" name="input_csrf" value="{{ csrf_token }}" >
         <button>Submit</button>
     </form>
 {% endblock body %}

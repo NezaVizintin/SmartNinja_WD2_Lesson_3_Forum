@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}{{ topic.title }}{% endblock title %}
+
+{% block body %}
+    <h1>{{ topic.title }}</h1>
+
+  <!--  The program below converts a datetime object containing current date and time to different string formats-->
+    <small>Posted by {{ topic.author.username }} on {{ topic.created_at.strftime('%d %b %Y') }}</small>
+
+    <!-- Edit or delete topic -->
+    {% if user and user.id == topic.author.id %}
+        <p>
+            <a href="/topic/{{topic.topic_id}}/topic-edit">Edit</a> |
+            <a href="/topic/{{topic.topic_id}}/topic-delete">Delete</a>
+        </p>
+    {% endif %}
+
+    <p>{{ topic.description }}</p>
+
+    <table>
+        <tr>
+            <th>Komentar</th>
+            <th>Avthor</th>
+            <th>Datum</th>
+        </tr>
+        {% for comment in comments %}
+        <tr>
+            <td>{{comment.body}}</td>
+            <td>{{comment.author.username}}</td>
+            <td>{{topic.created_at}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    {% if user %}
+        <form method="post" action="/topic/{{topic.topic_id}}">
+            <textarea name="text">Enter your message...</textarea>
+            <input type="hidden" name="input_csrf" value="{{ csrf_token }}" >
+            <button type="submit">Submit</button>
+        </form>
+    {% else %}
+        <h3>Login to comment</h3>
+        <a href="/login" type="button">Login</a>
+    {% endif %}
+{% endblock body %}

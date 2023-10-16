@@ -3,18 +3,25 @@
 {% block title %}Forum 9000{% endblock title %}
 
 {% block body %}
-    <table>
-        <tr>
-            <th>Naslov</th>
-            <th>Avthor</th>
-            <th>Datum</th>
-        </tr>
-        {% for topic in topics %}
-        <tr>
-            <td><a href="/topic/{{topic.topic_id}}">{{topic.title}}</a></td>
-            <td>{{topic.author.username}}</td>
-            <td>{{topic.created}}</td>
-        </tr>
-        {% endfor %}
+    <a href="/topic-create" class="btn btn-success round mb-3">New topic</a>
+
+    <table class="table table-success table-striped">
+        <thead>
+            <tr>
+                <th>Naslov</th>
+                <th>Avthor</th>
+                <th>Datum</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for topic in topics %}
+                <tr>
+                    <td><a href="/topic/{{topic.topic_id}}" class="link-primary">{{topic.title}}</a></td>
+                    <td>{{topic.author.username}}</td>
+                    <td>{{topic.created_at}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
     </table>
 {% endblock body %}

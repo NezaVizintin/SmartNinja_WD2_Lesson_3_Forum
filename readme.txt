@@ -1,0 +1,7 @@
+# TO-DO:
+#
+# - signup: have user enter password twice
+# - edit user details
+# - pagination
+# - frontend
+# - about user: display user's comments and topics
