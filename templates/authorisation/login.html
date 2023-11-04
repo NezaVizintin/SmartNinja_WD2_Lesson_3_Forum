@@ -2,12 +2,38 @@
 {% block title %}Login{% endblock title %}
 
 {% block body %}
-    <form method="post" action="/login">
-        <p>
-            <label for="input-name">Username:</label> <input type="text" name="input-name" id="input-name">
-            <label for="input-password">Password:</label> <input type="password" name="input-password" id="input-password">
-        </p>
-        <button type="submit">Submit</button>
-    </form>
-    <a href="/sign-up" type="button">Sign up</a>
+<div class="card mb-3">
+    <div class="row g-0 d-flex align-items-center">
+        <!-- Image -->
+        <div class="col-lg-4 d-none d-lg-flex">
+            <img src="../../static/images/img-login.jpg" style="height: 200px">
+        </div>
+
+        <div class="col-lg-8">
+            <div class="card-body py-5 px-md-5 text-center">
+
+                <form method="post" action="/login">
+                    <!-- Email input -->
+                    <div class="mb-3">
+                        <label for="input-name" class="form-label">Username</label>
+                        <input type="text" name="input-name" id="input-name" class="form-control">
+                    </div>
+                    <!-- Password input -->
+                    <div class="mb-3">
+                        <label for="input-password" class="form-label">Password:</label>
+                        <input type="password" name="input-password" id="input-password" class="form-control">
+                    </div>
+                    <!-- Submit -->
+                    <button type="submit" class="btn btn-success btn-block mb-4">Submit</button>
+                    <!-- Sign-up -->
+                    <a href="/sign-up" type="button" class="ms-3 link-offset-2 link-offset-3-hover
+                                                            link-underline link-underline-opacity-0
+                                                            link-underline-opacity-75-hover"
+                    >Sign up</a>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock body %}

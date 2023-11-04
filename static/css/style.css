@@ -1,0 +1,38 @@
+@font-face {
+    font-family: Outsourced Retro;
+    src: url("../fonts/retro-font.otf") format("opentype");
+}
+.text-red {
+    color: red;
+}
+
+.font-size-title {
+    /*font-size: 5vw; - for later when creating a responsive design*/
+    font-size: 100px;
+}
+
+.btn-sm.round {
+	border-radius: 10px;
+}
+
+.bold {
+    font-weight: bolder;
+}
+
+/*
+figure out how to override bootstrap css
+
+
+#bootstrap-overrides.success:link {
+  color: red;
+}
+
+!* mouse over link *!
+#bootstrap-overrides.success:hover {
+  color: hotpink;
+}
+
+!* selected link *!
+#bootstrap-overrides.success:active {
+  color: blue;
+}*/
