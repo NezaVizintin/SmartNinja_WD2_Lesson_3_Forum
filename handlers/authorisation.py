@@ -52,7 +52,6 @@ def login():
     elif request.method == "POST":
         input_name = request.form.get("input-name")
         input_password = request.form.get("input-password")
-
         input_password_hashed = password_hash(input_password)
         user = db.query(User).filter_by(username=input_name, password_hash=input_password_hashed).first()
 
@@ -63,3 +62,11 @@ def login():
             return response
         else:
             return "Username or password was incorrect."
+
+
+@authentication_handlers.route("/logout", methods=["GET", "POST"])
+def logout():
+    response = make_response(redirect(url_for("landing_handlers.index")))
+    response.set_cookie("session_token", "session_token", max_age=0)
+
+    return response

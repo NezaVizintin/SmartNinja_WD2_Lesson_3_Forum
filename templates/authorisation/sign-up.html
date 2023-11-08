@@ -1,13 +1,61 @@
 {% extends "base.html" %}
 {% block title %}Sign up{% endblock title %}
 
+{% block login_signup %}{% endblock %}
+
 {% block body %}
-    <form method="post" action="/sign-up">
-        <p>
-            Username: <input type="text" name="input-name">
-            E-mail: <input type="email" name="input-email">
-            Password: <input type="password" name="input-password">
-        </p>
-        <button type="submit">Submit</button>
-    </form>
+    <section class="text-center text-lg-start">
+        <div class="d-flex justify-content-center">
+            <div class="mt-5 card mb-3 row col-6">
+                <div class="row g-0 d-flex align-items-center">
+
+                    <!-- Image -->
+                    <div class="col-lg-4 d-none d-lg-flex h-100">
+                        <img src="../../static/images/img-book-pedestal.jpeg" alt="Oh no, the image is missing :(!"
+                             class="w-100 rounded-t-5 rounded-tr-lg-0 rounded-bl-lg-5" title="AI 'art'"/>
+                    </div>
+
+                    <div class="col-lg-8">
+                        <div class="card-body py-5 px-md-5">
+
+                            <!-- Form -->
+                            <form method="post" action="/sign-up">
+                                <!-- Username input -->
+                                <div class="form-outline mb-4">
+                                    <input type="text" name="input-name" id="input-name" class="form-control"/>
+                                    <label for="input-name" class="form-label">Username</label>
+                                </div>
+
+                                <!-- Email input -->
+                                <div class="form-outline mb-4">
+                                    <input type="email" name="input-email" id="input-name" class="form-control"
+                                           required/>
+                                    <label for="input-name" class="form-label">E-mail</label>
+                                </div>
+
+                                <!-- Password input -->
+                                <div class="form-outline mb-4">
+                                    <input type="password" name="input-password" id="input-password"
+                                           class="form-control" required/>
+                                    <label for="input-password" class="form-label">Password</label>
+                                </div>
+
+                                <!-- Submit button -->
+                                <button type="submit" class="btn btn-success btn-block mb-4">Sign up</button>
+
+                                <div class="text-center mb-4">
+                                    <a href="/login" type="button" class="link-offset-2 link-offset-3-hover
+                                                                        link-underline link-underline-opacity-0
+                                                                        link-underline-opacity-75-hover"
+                                    >Login</a>
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock body %}

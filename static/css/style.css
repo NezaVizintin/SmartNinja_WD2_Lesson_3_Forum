@@ -12,12 +12,57 @@
 }
 
 .btn-sm.round {
-	border-radius: 10px;
+    border-radius: 10px;
 }
 
 .bold {
     font-weight: bolder;
 }
+
+.font-retro {
+    font-family: Outsourced Retro, Roboto, monospace;
+}
+
+.rounded-t-5 {
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+}
+
+@media (min-width: 992px) {
+    .rounded-tr-lg-0 {
+        border-top-right-radius: 0;
+    }
+
+    .rounded-bl-lg-5 {
+        border-bottom-left-radius: 0.5rem;
+    }
+}
+
+/*.form-outline {
+    position: relative;
+}
+
+.form-outline input {
+    padding-top: 1.5rem;
+}
+
+.form-outline input:focus {
+    padding-top: 1.5rem;
+}
+
+.form-outline label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0.5rem;
+    pointer-events: none;
+    transition: top 0.2s, font-size 0.2s;
+}
+
+.form-outline input:focus~label {
+    top: -1.5rem;
+    font-size: 1.0rem;
+}*/
 
 /*
 figure out how to override bootstrap css

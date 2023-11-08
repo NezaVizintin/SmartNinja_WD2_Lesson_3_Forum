@@ -6,34 +6,69 @@
         <title>{% block title %}{% endblock title %}</title>
 
         <!-- Bootstrap -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+              crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+                crossorigin="anonymous">
+        </script>
 
-        <!-- stylasheet -->
+        <!-- MDB -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet"/>
+        <script type="text/javascript"
+                src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
+
+        <!-- Stylesheet -->
         <link href="static/css/style.css" rel="stylesheet">
 
-        <script src="static/js/script.js"></script>
+        <!-- Game -->
         <script src="static/js/game.js"></script>
+
+        <!-- Page JS -->
+        <script src="static/js/script.js"></script>
 
         {%block head%}
         {%endblock%}
     </head>
 
-    <body class="text-center">
-            <div class="text-center m-2 mb-3">
-                <a class="display-3 text-success text-decoration-none font-size-title" href="/" style="font-family: Outsourced Retro">Forum 9000</a>
-             </div>
+    <body>
+    <!-- Header -->
+    <div>
+        <div class="text-center m-2 mb-3">
+            <a class="font-retro display-3 text-success text-decoration-none font-size-title" href="/">Forum 9000</a>
+        </div>
 
-            <div class="m-3 mb-5 d-flex">
-                {% if user %}
-                    <a href="/user-about" class="link-success text-decoration-none text-uppercase bold h5">{{user.username}}</a>
-                {% else %}
-                    <a href="/login" type="button" class="btn btn-sm btn-secondary round ms-auto me-3 col-md-2">Login</a>
-                {% endif %}
-            </div>
+        <div class="m-3 mb-5 d-flex">
+            {% if user %}
+                <a href="/user-about"
+                   class="link-success text-decoration-none text-uppercase bold h5">{{ user.username }}</a>
+                <a href="/logout" type="button"
+                   class="btn btn-sm btn-secondary round ms-auto me-3 col-md-1 bg-success bg-opacity-25">Logout</a>
+            {% else %}
+                {% block login_signup %}
+                    <div class="d-flex ms-auto me-3 col-md-1 row justify-content-center gap-1 text-center">
+                        <a href="/login" type="button" class="btn btn-sm btn-secondary round bg-success bg-opacity-50">Login</a>
+                        <a href="/sign-up" type="button"
+                           class="btn btn-sm btn-secondary round bg-success bg-opacity-25">Sign up</a>
+                    </div>
+                {% endblock %}
+            {% endif %}
+        </div>
+    </div>
 
-            <div class="m-3">
-                {% block body %}{% endblock body %}
-            </div>
+    <!-- Body -->
+    <div class="m-3">
+        {% block body %}{% endblock body %}
+    </div>
+
+    <footer class="bg-light text-center text-lg-start fixed-bottom">
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 30, 0, 0.2);">
+            All images created by Perchance free AI tool:
+            <a class="text-dark" href="https://perchance.org/">Perchance.com</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
     </body>
 </html>
