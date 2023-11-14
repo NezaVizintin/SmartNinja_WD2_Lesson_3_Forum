@@ -11,17 +11,18 @@
     font-size: 100px;
 }
 
-.btn-sm.round {
-    border-radius: 10px;
+.height-auto {
+    height:auto;
 }
 
-.bold {
-    font-weight: bolder;
+.btn-sm.round {
+    border-radius: 10px;
 }
 
 .font-retro {
     font-family: Outsourced Retro, Roboto, monospace;
 }
+
 
 .rounded-t-5 {
     border-top-left-radius: 0.5rem;

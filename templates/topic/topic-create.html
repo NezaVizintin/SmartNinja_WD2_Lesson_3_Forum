@@ -2,6 +2,7 @@
 {% block title %}Create topic{% endblock title %}
 
 {% block body %}
+<div class="d-flex flex-column justify-content-center text-center">
     <h1>Create a new topic</h1>
 
     <form method="post">
@@ -10,4 +11,5 @@
         <input type="hidden" name="input_csrf" value="{{ csrf_token }}" >
         <button>Submit</button>
     </form>
+</div>
 {% endblock body %}

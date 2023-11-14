@@ -52,8 +52,15 @@ def login():
     elif request.method == "POST":
         input_name = request.form.get("input-name")
         input_password = request.form.get("input-password")
+
+        if not input_name or not input_password:
+            return "Please fill out all required fields."
+
         input_password_hashed = password_hash(input_password)
         user = db.query(User).filter_by(username=input_name, password_hash=input_password_hashed).first()
+
+        if not input_name or not input_password:
+            return "Please fill out all required fields."
 
         if user and user.username == input_name and user.password_hash == input_password_hashed:
             response = make_response(redirect(url_for("user_handlers.user_about")))

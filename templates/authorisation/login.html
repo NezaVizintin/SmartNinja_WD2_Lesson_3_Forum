@@ -6,7 +6,7 @@
 {% block body %}
     <section class="text-center text-lg-start">
         <div class="d-flex justify-content-center">
-            <div class="mt-5 card row col-8">
+            <div class="mt-5 card row col-9">
                 <div class="row g-0 d-flex align-items-center">
 
                     <!-- Image -->
@@ -16,33 +16,31 @@
                     </div>
 
 
-                    <div class="card-body py-4 px-md-5 col-lg-8">
+                    <div class="card-body py-5 px-md-5 col-lg-8">
                         <!-- Form -->
-                        <form method="post" action="/login" class="g-3 needs-validation" novalidate>
+                        <form method="post" action="/login" id="loginForm" class="needs-validation" novalidate>
 
                             <!-- Username input -->
-                            <div class="form-outline mb-4">
-                                <input type="text" name="input-name" id="input-name" class="form-control" required/>
+                            <div class="form-outline mb-4 py-2">
                                 <label for="input-name" class="form-label">Username</label>
+                                <input type="text" name="input-name" id="input-name" class="form-control pb-3" required/>
+                                <div class="valid-feedback">Looks good!</div>
+                                <div class="invalid-feedback">Enter username.</div>
                             </div>
-                            <!-- Validation feedback -->
-                            <div class="valid-feedback">Pravilno izpolnjeno!</div>
-                            <div class="invalid-feedback">Vpišite uporabniško ime.</div>
 
                             <!-- Password input -->
-                            <div class="form-outline mb-4">
-                                <input type="password" name="input-password" id="input-password" class="form-control" required/>
+                            <div class="form-outline mb-4 py-2">
                                 <label for="input-password" class="form-label">Password</label>
+                                <input type="password" name="input-password" id="input-password" class="form-control" required/>
+                                <div class="valid-feedback">Looks good!</div>
+                                <div class="invalid-feedback">Enter password.</div>
                             </div>
-                            <!-- Validation feedback -->
-                            <div class="valid-feedback">Pravilno izpolnjeno!</div>
-                            <div class="invalid-feedback">Vpišite geslo.</div>
 
                             <!-- Submit button -->
-                            <button type="submit" class="btn btn-success btn-block mb-4">Log in</button>
+                            <button type="submit" class="btn btn-success btn-block mb-4 mt-1">Log in</button>
 
                             <!-- Sign-up link -->
-                            <div class="text-center mb-4">
+                            <div class="text-center">
                                 <a href="/sign-up" type="button" class="link-offset-2 link-offset-3-hover
                                                                     link-underline link-underline-opacity-0
                                                                     link-underline-opacity-75-hover"
