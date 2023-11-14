@@ -18,21 +18,21 @@
         <h3>Hello {% if name %} {{name}}! {% endif %}</h3>
     </div>
 
-    <table>
-        <tr>
-            <td id="box1-1" onclick="makeMove(1, 1)"></td>
-            <td id="box1-2" onclick="makeMove(1, 2)"></td>
-            <td id="box1-3" onclick="makeMove(1, 3)"></td>
-        </tr>
-        <tr>
-            <td id="box2-1" onclick="makeMove(2, 1)"></td>
-            <td id="box2-2" onclick="makeMove(2, 2)"></td>
-            <td id="box2-3" onclick="makeMove(2, 3)"></td>
-        </tr>
-        <tr>
-            <td id="box3-1" onclick="makeMove(3, 1)"></td>
-            <td id="box3-2" onclick="makeMove(3, 2)"></td>
-            <td id="box3-3" onclick="makeMove(3, 3)"></td>
-        </tr>
-    </table>
+    <table class="mx-auto">
+    <tr>
+        <td id="box1-1"></td>
+        <td id="box1-2"></td>
+        <td id="box1-3"></td>
+    </tr>
+    <tr>
+        <td id="box2-1"></td>
+        <td id="box2-2"></td>
+        <td id="box2-3"></td>
+    </tr>
+    <tr>
+        <td id="box3-1"></td>
+        <td id="box3-2"></td>
+        <td id="box3-3"></td>
+    </tr>
+</table>
 {% endblock body %}

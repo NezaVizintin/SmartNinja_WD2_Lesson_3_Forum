@@ -38,6 +38,18 @@
     }
 }
 
+/*
+.form-outline {
+        position: relative;
+    }
+
+.form-outline input:focus ~ .form-label,
+.form-outline input:not(:placeholder-shown) ~ .form-label {
+    top: -1.5rem;
+    font-size: 0.8rem;
+}
+*/
+
 /*.form-outline {
     position: relative;
 }
