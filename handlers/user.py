@@ -1,4 +1,4 @@
-from flask import render_template, request, make_response, redirect, url_for, Blueprint
+from flask import render_template, request, make_response, redirect, url_for, Blueprint, jsonify
 from models.settings import db
 from models.user import User
 
@@ -26,3 +26,11 @@ def user_about():
         response = make_response(render_template("user/user-about.html", name=user.username))
 
         return response
+
+
+@user_handlers.route('/validation/user-exists/<user_name>')
+def user_exists(user_name):
+    existing_users = ['janez', 'micka', 'lojzka', 'franc']
+
+    user_exists = user_name in existing_users
+    return jsonify(user_exists)

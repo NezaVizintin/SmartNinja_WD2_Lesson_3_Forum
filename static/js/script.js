@@ -19,11 +19,31 @@ if (!document.cookie) {
             }
             form.classList.add('was-validated');
         }, false);
+
+        document.getElementById('input-name').addEventListener('blur', event => {
+
+        let uname = event.target.value;
+          var res = fetch('validation/user-exists/' + uname)
+
+          res.then(r => {
+            return r.json();
+          }).then(user_is_valid => {
+              if(!user_is_valid){
+                event.target.classList.add('is-invalid');
+                event.target.classList.remove('is-valid');
+              }else{
+                event.target.classList.add('is-valid');
+                event.target.classList.remove('is-invalid');
+              }
+            })
+          .catch(e => {
+            console.error('error making http request', e)
+          })
+      })
+//        // Show success message on form submission
+//        document.getElementById('loginForm').addEventListener('submit', function (event) {
+//            event.preventDefault();
+//            document.getElementById('successMessage').style.display = 'block';
+//        });
     }, false);
 })();
-
-// Show success message on form submission
-document.getElementById('loginForm').addEventListener('submit', function (event) {
-    event.preventDefault();
-    document.getElementById('successMessage').style.display = 'block';
-});
