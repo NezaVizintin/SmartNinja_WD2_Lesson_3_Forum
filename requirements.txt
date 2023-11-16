@@ -3,3 +3,5 @@ sqla-wrapper==4.200628
 argon2-cffi
 smartninja_redis
 requests
+Werkzeug==2.2.2
+bcrypt
