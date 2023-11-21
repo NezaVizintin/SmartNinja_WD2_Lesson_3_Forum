@@ -21,4 +21,4 @@ app.register_blueprint(comment.comment_handlers)
 app.register_blueprint(game.game_handlers)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

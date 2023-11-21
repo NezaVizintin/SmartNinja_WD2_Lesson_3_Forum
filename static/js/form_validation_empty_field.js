@@ -8,22 +8,23 @@ if (!document.cookie) {
 }*/
 
 // Disable form submission if there are invalid fields
-(function () {
-    'use strict';
-    window.addEventListener('load', function () {
-        var form = document.getElementById('loginForm');
-        form.addEventListener('submit', function (event) {
+(() => {
+    "use strict";
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll('.needs-validation');
+
+    // Loop over them
+    Array.prototype.slice.call(forms).forEach((form) => {
+
+        // when submit is triggered
+        form.addEventListener('submit', (event) => {
+            // prevent submission
             if (!form.checkValidity()) {
                 event.preventDefault();
                 event.stopPropagation();
             }
             form.classList.add('was-validated');
         }, false);
-    }, false);
+    });
 })();
-
-// Show success message on form submission
-document.getElementById('loginForm').addEventListener('submit', function (event) {
-    event.preventDefault();
-    document.getElementById('successMessage').style.display = 'block';
-});

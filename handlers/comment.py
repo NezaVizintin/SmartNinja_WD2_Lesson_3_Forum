@@ -8,6 +8,7 @@ comment_handlers = Blueprint("comment_handlers", __name__)
 
 @comment_handlers.route("/comment-create", methods=["GET", "POST"])
 def comment_create():
+
     user = user_get()
     if request.method == "GET":
         if not user:
@@ -15,7 +16,7 @@ def comment_create():
         pass
 
     elif request.method == "POST":
-        body = request.form.get("text")
+        body = request.form.get("input-comment")
 
         Comment.create(body=body, author=user)
 

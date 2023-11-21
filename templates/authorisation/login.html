@@ -6,7 +6,7 @@
 {% block body %}
     <section class="text-center text-lg-start">
         <div class="d-flex justify-content-center">
-            <div class="mt-5 card row col-9">
+            <div class="mt-5 card row col-6">
                 <div class="row g-0 d-flex align-items-center">
 
                     <!-- Image -->
@@ -18,22 +18,26 @@
 
                     <div class="card-body py-5 px-md-5 col-lg-8">
                         <!-- Form -->
-                        <form method="post" action="/login" id="loginForm" class="needs-validation" novalidate>
+                        <form method="post" action="/login" class="needs-validation" novalidate>
 
                             <!-- Username input -->
                             <div class="form-outline mb-4 py-2">
                                 <label for="input-name" class="form-label">Username</label>
-                                <input type="text" name="input-name" id="input-name" class="form-control pb-3" required/>
-                                <div class="valid-feedback">Looks good!</div>
-                                <div class="invalid-feedback">Enter username.</div>
+                                <input type="text" name="input-name" id="input-name" class="form-control border" required/>
+
+                                <!-- Validation responses -->
+                                <div class="valid-feedback">Looks good</div>
+                                <div class="invalid-feedback">Enter username</div>
                             </div>
 
                             <!-- Password input -->
                             <div class="form-outline mb-4 py-2">
                                 <label for="input-password" class="form-label">Password</label>
-                                <input type="password" name="input-password" id="input-password" class="form-control" required/>
-                                <div class="valid-feedback">Looks good!</div>
-                                <div class="invalid-feedback">Enter password.</div>
+                                <input type="password" name="input-password" id="input-password" class="form-control border" required/>
+
+                                <!-- Validation responses -->
+                                <div class="valid-feedback">Looks good</div>
+                                <div class="invalid-feedback">Enter password</div>
                             </div>
 
                             <!-- Submit button -->
@@ -54,4 +58,6 @@
             </div>
         </div>
     </section>
+
+    <script src="../../static/js/form_validation_empty_field.js"></script>
 {% endblock body %}

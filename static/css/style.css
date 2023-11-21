@@ -23,6 +23,9 @@
     font-family: Outsourced Retro, Roboto, monospace;
 }
 
+.font-title {
+    font-family: Roboto, monospace;
+}
 
 .rounded-t-5 {
     border-top-left-radius: 0.5rem;

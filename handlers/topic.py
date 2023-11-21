@@ -26,8 +26,8 @@ def topic_create():
     elif request.method == "POST":
         input_token = request.form.get("input_csrf")  # get csrf from HTML
         if csrf_token_check(input_token, username):
-            title = request.form.get("title")
-            description = request.form.get("description")
+            title = request.form.get("input-title")
+            description = request.form.get("input-description")
 
             # create a Topic object
             Topic.create(title=title, description=description, author=user)
@@ -90,8 +90,8 @@ def topic_edit(topic_id):
         return render_template("topic/topic-edit.html", topic=topic, csrf_token=csrf_token) # send CSRF token into HTML template
 
     elif request.method == "POST":
-        title = request.form.get("title")
-        description = request.form.get("description")
+        title = request.form.get("input-title")
+        description = request.form.get("input-description")
         input_token = request.form.get("input_csrf")  # get csrf from HTML
 
         if csrf_token_check(input_token, username):

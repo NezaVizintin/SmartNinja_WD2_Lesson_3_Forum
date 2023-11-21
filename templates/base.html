@@ -22,11 +22,7 @@
         <!-- Stylesheet -->
         <link href="../static/css/style.css" rel="stylesheet">
 
-        <!-- Game -->
-{#        <script src="../static/js/game.js"></script>#}
-
         <!-- Page JS -->
-        <script src="../static/js/script.js"></script>
         <script src="../static/js/requests.js"></script>
 
         {%block head%}
@@ -43,9 +39,9 @@
         <div class="m-3 mb-5 d-flex">
             {% if user %}
                 <a href="/user-about"
-                   class="link-success text-decoration-none text-uppercase bold h5">{{ user.username }}</a>
+                   class="link-success text-decoration-none text-uppercase h5">{{ user.username }}</a>
                 <a href="/logout" type="button"
-                   class="btn btn-sm btn-secondary round ms-auto me-3 col-md-1 bg-success bg-opacity-25">Logout</a>
+                   class="btn btn-sm btn-secondary round ms-auto me-3 col-md-1 bg-success bg-opacity-25 px-1">Logout</a>
             {% else %}
                 {% block login_signup %}
                     <div class="d-flex ms-auto me-3 col-md-1 row justify-content-center gap-1 text-center">
@@ -63,7 +59,7 @@
         {% block body %}{% endblock body %}
     </div>
 
-    <footer class="bg-light text-center text-lg-start fixed-bottom">
+    <footer class="bg-light text-center text-lg-start fixed-bottom mt-5">
         <!-- Copyright -->
         <div class="text-center p-3" style="background-color: rgba(0, 30, 0, 0.2);">
             All images created by Perchance free AI tool:

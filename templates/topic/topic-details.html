@@ -3,44 +3,64 @@
 {% block title %}{{ topic.title }}{% endblock title %}
 
 {% block body %}
-    <h1>{{ topic.title }}</h1>
+    <div class="d-flex row justify-content-center my-5">
+        <div class="col-11 d-flex flex-column">
 
-  <!--  The program below converts a datetime object containing current date and time to different string formats-->
-    <small>Posted by {{ topic.author.username }} on {{ topic.created_at.strftime('%d %b %Y') }}</small>
+            <h1 class="text-success mb-5 fw-bold font-title">{{ topic.title }}</h1>
 
-    <!-- Edit or delete topic -->
-    {% if user and user.id == topic.author.id %}
-        <p>
-            <a href="/topic/{{topic.topic_id}}/topic-edit">Edit</a> |
-            <a href="/topic/{{topic.topic_id}}/topic-delete">Delete</a>
-        </p>
-    {% endif %}
+            <!-- Topic details -->
+            <div class="card">
+                <div class="card-header">
+                    <!--  The program below converts a datetime object containing current date and time to different string formats-->
+                    <small>Posted by {{ topic.author.username }} on {{ topic.created_at.strftime('%d %b %Y') }}</small>
+                </div>
 
-    <p>{{ topic.description }}</p>
+                <div class="card-body">
+                    <p class="card-text">{{ topic.description }}</p>
+                </div>
 
-    <table>
-        <tr>
-            <th>Komentar</th>
-            <th>Avthor</th>
-            <th>Datum</th>
-        </tr>
-        {% for comment in comments %}
-        <tr>
-            <td>{{comment.body}}</td>
-            <td>{{comment.author.username}}</td>
-            <td>{{topic.created_at}}</td>
-        </tr>
-        {% endfor %}
-    </table>
+                <!-- Edit or delete topic -->
+                <div class="card-footer">
+                    {% if user and user.id == topic.author.id %}
+                        <div class="d-flex gap-2">
+                            <a href="/topic/{{topic.topic_id}}/topic-edit">Edit</a> |
+                            <a href="/topic/{{topic.topic_id}}/topic-delete">Delete</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
 
-    {% if user %}
-        <form method="post" action="/topic/{{topic.topic_id}}">
-            <textarea name="text">Enter your message...</textarea>
-            <input type="hidden" name="input_csrf" value="{{ csrf_token }}" >
-            <button type="submit">Submit</button>
-        </form>
-    {% else %}
-        <h3>Login to comment</h3>
-        <a href="/login" type="button">Login</a>
-    {% endif %}
+            <!-- Comments -->
+            {% for comment in comments %}
+                <div class="card">
+                    <div class="card-header"><small>Posted by {{ comment.author.username }} on {{ comment.created_at.strftime('%d %b %Y') }}</small></div>
+                        <div class="card-body">
+                            {{comment.body}}
+                        </div>
+                </div>
+            {% endfor %}
+
+            <!-- New comment form -->
+            <div class="mt-5 text-center">
+                <!-- if the user is logged in displays comment input otherwise displays log in link -->
+                {% if user %}
+                    <div class="form-outline">
+                        <form method="post">
+                            <label for="input-comment" class="form-label">Comment</label>
+                            <textarea name="input-comment" rows="5" class="form-control border">Enter your message...</textarea>
+
+                             <!-- Csrf field -->
+                            <input type="hidden" name="input_csrf" value="{{ csrf_token }}" >
+
+                             <!-- Submit button -->
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </form>
+                    </div>
+                {% else %}
+                    <h3>Login to comment</h3>
+                    <a href="/login" type="button">Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 {% endblock body %}

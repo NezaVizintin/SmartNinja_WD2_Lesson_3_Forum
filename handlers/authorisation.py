@@ -1,5 +1,5 @@
 import secrets
-from flask import render_template, request, make_response, redirect, url_for, Blueprint
+from flask import render_template, request, make_response, redirect, url_for, Blueprint, jsonify
 from models.settings import db
 from models.user import User
 import bcrypt
@@ -31,7 +31,6 @@ def sign_up():
             return "Sorry there is already a user with that name or email."
         else:
             input_password_hashed = password_hash(input_password)
-            print(f"sign_up() session token before saved: {session_token}")
 
             user = User(username=input_name, email=input_email, password_hash=input_password_hashed,
                         session_token=session_token)
@@ -59,12 +58,9 @@ def login():
         input_password_hashed = password_hash(input_password)
         user = db.query(User).filter_by(username=input_name, password_hash=input_password_hashed).first()
 
-        if not input_name or not input_password:
-            return "Please fill out all required fields."
-
         if user and user.username == input_name and user.password_hash == input_password_hashed:
             response = make_response(redirect(url_for("user_handlers.user_about")))
-            response.set_cookie("session_token", user.session_token)
+            response.set_cookie("session_token", user.session_token, httponly=True, samesite="strict")
 
             return response
         else:
@@ -77,3 +73,14 @@ def logout():
     response.set_cookie("session_token", "session_token", max_age=0)
 
     return response
+
+# Validation - checks if a user with that username is in the database
+@authentication_handlers.route("/validation/user-exists/<input_username>")
+def user_exists(input_username):
+    user = db.query(User).filter_by(username=input_username).first()
+
+    user_exists = user is not None # boolean
+
+
+    return jsonify(user_exists)
+

@@ -2,14 +2,34 @@
 {% block title %}Create topic{% endblock title %}
 
 {% block body %}
-<div class="d-flex flex-column justify-content-center text-center">
-    <h1>Create a new topic</h1>
+<div class="d-flex flex-column text-center mt-5">
 
+    <h1 class="text-success mb-5 fw-bold font-title">New topic</h1>
+    <!-- Form -->
     <form method="post">
-        <input type="text" name="title" placeholder="Topic title" required> <br>
-        <textarea name="description" rows="5" required></textarea> <br>
+        <!-- Topic title input -->
+        <div class="d-flex text-center flex-column col-10 col-xl-6 mx-auto">
+            <div class="form-outline mb-4 py-2">
+                <label for="input-title" class="form-label">Title</label>
+                <input type="text" name="input-title" placeholder="Enter compelling title..." class="form-control border" required> <br>
+            </div>
+
+            <!-- Topic description input -->
+            <div class="form-outline mb-4 py-2">
+                <label for="input-description" class="form-label">Description</label>
+                <textarea name="input-description" rows="5" class="form-control border" required></textarea> <br>
+            </div>
+        </div>
+
+        <!-- Csrf field -->
         <input type="hidden" name="input_csrf" value="{{ csrf_token }}" >
-        <button>Submit</button>
+
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-success">Create topic</button>
     </form>
+
+    <!-- Empty form validation -->
+    <script src="../../static/js/form_validation_empty_field.js"></script>
+
 </div>
 {% endblock body %}

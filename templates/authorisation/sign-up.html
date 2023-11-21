@@ -6,7 +6,7 @@
 {% block body %}
     <section class="text-center text-lg-start">
         <div class="d-flex justify-content-center">
-            <div class="mt-5 card mb-3 row col-6">
+            <div class="mt-5 card row col-6">
                 <div class="row g-0 d-flex align-items-center">
 
                     <!-- Image -->
@@ -15,46 +15,59 @@
                              class="w-100 rounded-t-5 rounded-tr-lg-0 rounded-bl-lg-5" title="AI 'art'"/>
                     </div>
 
-                    <div class="col-lg-8">
-                        <div class="card-body py-5 px-md-5">
+                    <div class="card-body py-5 px-md-5 col-lg-8">
 
-                            <!-- Form -->
-                            <form method="post" action="/sign-up">
-                                <!-- Username input -->
-                                <div class="form-outline mb-4">
-                                    <input type="text" name="input-name" id="input-name" class="form-control" required/>
-                                    <label for="input-name" class="form-label">Username</label>
-                                </div>
+                        <!-- Form -->
+                        <form method="post" action="/sign-up" class="needs-validation" id="form-sign-up" novalidate>
 
-                                <!-- Email input -->
-                                <div class="form-outline mb-4">
-                                    <input type="email" name="input-email" id="input-name" class="form-control" required/>
-                                    <label for="input-name" class="form-label">E-mail</label>
-                                </div>
+                            <!-- Username input -->
+                            <div class="form-outline mb-4" py-2>
+                                <label for="input-name" class="form-label">Username</label>
+                                <input type="text" name="input-name" id="input-name" class="form-control border" required/>
 
-                                <!-- Password input -->
-                                <div class="form-outline mb-4">
-                                    <input type="password" name="input-password" id="input-password" class="form-control" required/>
-                                    <label for="input-password" class="form-label">Password</label>
-                                </div>
+                                <!-- Validation responses -->
+                                <div class="valid-feedback">Looks good</div>
+                                <div class="invalid-feedback" id="validity-response-name-invalid">Enter username</div>
+                            </div>
 
-                                <!-- Submit button -->
-                                <button type="submit" class="btn btn-success btn-block mb-4">Sign up</button>
+                            <!-- Email input -->
+                            <div class="form-outline mb-4 py-2">
+                                <label for="input-name" class="form-label">E-mail</label>
+                                <input type="email" name="input-email" id="input-email" class="form-control border" required/>
 
-                                <!-- Login link -->
-                                <div class="text-center mb-4">
-                                    <a href="/login" type="button" class="link-offset-2 link-offset-3-hover
-                                                                        link-underline link-underline-opacity-0
-                                                                        link-underline-opacity-75-hover"
-                                    >Login</a>
-                                </div>
+                                <!-- Validation responses -->
+                                <div class="valid-feedback">Looks good</div>
+                                <div class="invalid-feedback">Enter email</div>
+                            </div>
 
-                            </form>
+                            <!-- Password input -->
+                            <div class="form-outline mb-4 py-2">
+                                <label for="input-password" class="form-label">Password</label>
+                                <input type="password" name="input-password" id="input-password" class="form-control border" required/>
 
-                        </div>
+                                <!-- Validation responses -->
+                                <div class="valid-feedback" >Looks good</div>
+                                <div class="invalid-feedback">Enter password</div>
+                            </div>
+
+                            <!-- Submit button -->
+                            <button type="submit" class="btn btn-success btn-block mb-4 mt-1">Sign up</button>
+
+                            <!-- Login link -->
+                            <div class="text-center mb-4">
+                                <a href="/login" type="button" class="link-offset-2 link-offset-3-hover
+                                                                    link-underline link-underline-opacity-0
+                                                                    link-underline-opacity-75-hover"
+                                >Login</a>
+                            </div>
+
+                        </form>
+
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <script src="../../static/js/form_validation_sign_up.js"></script>
 {% endblock body %}
