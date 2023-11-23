@@ -1,26 +1,9 @@
 from flask import render_template, request, redirect, url_for, Blueprint
 from models.settings import db
 from models.topic import Topic
-from models.comment import Comment
 from handlers.user import user_get
 
 comment_handlers = Blueprint("comment_handlers", __name__)
-
-@comment_handlers.route("/comment-create", methods=["GET", "POST"])
-def comment_create():
-
-    user = user_get()
-    if request.method == "GET":
-        if not user:
-            return redirect(url_for("authentication_handlers.login"))
-        pass
-
-    elif request.method == "POST":
-        body = request.form.get("input-comment")
-
-        Comment.create(body=body, author=user)
-
-        return redirect(url_for("landing_handlers.index"))
 
 @comment_handlers.route("/comment/<comment_id>/comment-delete", methods=["GET", "POST"])
 def comment_delete(comment_id):

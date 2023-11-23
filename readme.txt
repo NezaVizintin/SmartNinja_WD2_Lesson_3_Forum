@@ -17,3 +17,5 @@ TO-DO:
         - have user enter password twice
     New topic:
         - no empty fields
+Bugs:
+- posting a comment without refreshing the page or when clicking back to the page giver invalid csrf token error

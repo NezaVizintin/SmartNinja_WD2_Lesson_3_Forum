@@ -5,61 +5,91 @@
 {% block body %}
     <div class="d-flex row justify-content-center my-5">
         <div class="col-11 d-flex flex-column">
-
+            <!-- Topic title -->
             <h1 class="text-success mb-5 fw-bold font-title">{{ topic.title }}</h1>
 
             <!-- Topic details -->
-            <div class="card">
-                <div class="card-header">
+            <div class="card mb-3">
+
+                <!-- Author name, date and time -->
+                <div class="card-header background-color-success-dark">
                     <!--  The program below converts a datetime object containing current date and time to different string formats-->
-                    <small>Posted by {{ topic.author.username }} on {{ topic.created_at.strftime('%d %b %Y') }}</small>
+                    <small>Posted by {{ topic.author.username }} on {{ topic.created_at.strftime('%d %b %Y at %H:%M') }}</small>
                 </div>
 
-                <div class="card-body">
+                <!-- Topic description -->
+                <div class="card-body background-color-success-light-transparent-05">
                     <p class="card-text">{{ topic.description }}</p>
                 </div>
 
-                <!-- Edit or delete topic -->
-                <div class="card-footer">
+                <!-- Edit or delete topic buttons -->
+                <div class="card-footer background-color-success-dark-transparent-07">
                     {% if user and user.id == topic.author.id %}
                         <div class="d-flex gap-2">
-                            <a href="/topic/{{topic.topic_id}}/topic-edit">Edit</a> |
-                            <a href="/topic/{{topic.topic_id}}/topic-delete">Delete</a>
+                            <a href="/topic/{{topic.topic_id}}/topic-edit" type="button" class="btn btn-sm btn-link">Edit</a> |
+                            <button type="button" class="btn btn-sm btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
                         </div>
                     {% endif %}
                 </div>
+
             </div>
 
             <!-- Comments -->
             {% for comment in comments %}
                 <div class="card">
-                    <div class="card-header"><small>Posted by {{ comment.author.username }} on {{ comment.created_at.strftime('%d %b %Y') }}</small></div>
-                        <div class="card-body">
-                            {{comment.body}}
-                        </div>
+                    <!-- Author name, date and time -->
+                    <div class="card-header background-color-success-dark-transparent-07">
+                        <small>Posted by {{ comment.author.username }} on {{ comment.created_at.strftime('%d %b %Y at %H:%M') }}</small>
+                    </div>
+                    <!-- Comment body -->
+                    <div class="card-body background-color-success-light-transparent-03">
+                        {{comment.body}}
+                    </div>
                 </div>
             {% endfor %}
 
             <!-- New comment form -->
-            <div class="mt-5 text-center">
-                <!-- if the user is logged in displays comment input otherwise displays log in link -->
-                {% if user %}
-                    <div class="form-outline">
-                        <form method="post">
-                            <label for="input-comment" class="form-label">Comment</label>
-                            <textarea name="input-comment" rows="5" class="form-control border">Enter your message...</textarea>
+            <!-- if the user is logged in displays comment input otherwise displays log in link -->
+            {% if user %}
+                <div class="form-outline d-flex justify-content-center text-center mt-5">
+                    <form method="post" class="col-6">
+                        <!-- Input -->
+                        <label for="input-comment" class="form-label">Comment</label>
+                        <textarea name="input-comment" rows="5" class="form-control border mb-3">Enter your message...</textarea>
 
-                             <!-- Csrf field -->
-                            <input type="hidden" name="input_csrf" value="{{ csrf_token }}" >
+                         <!-- Csrf field -->
+                        <input type="hidden" name="input_csrf" value="{{ csrf_token }}" >
 
-                             <!-- Submit button -->
-                            <button type="submit" class="btn btn-success">Submit</button>
-                        </form>
-                    </div>
-                {% else %}
-                    <h3>Login to comment</h3>
-                    <a href="/login" type="button">Login</a>
-                {% endif %}
+                         <!-- Submit button -->
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </form>
+                </div>
+            <!-- Log in prompt -->
+            {% else %}
+                <h3>Login to comment</h3>
+                <a href="/login" type="button">Login</a>
+            {% endif %}
+
+        </div>
+    </div>
+
+        <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete topic</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    Are you sure you want to delete your topic?
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="/topic/{{topic.topic_id}}/topic-delete" type="button" class="btn btn-danger">Delete</a>
+                </div>
             </div>
         </div>
     </div>

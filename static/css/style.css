@@ -1,3 +1,5 @@
+/* Text */
+
 @font-face {
     font-family: Outsourced Retro;
     src: url("../fonts/retro-font.otf") format("opentype");
@@ -11,20 +13,40 @@
     font-size: 100px;
 }
 
-.height-auto {
-    height:auto;
-}
-
-.btn-sm.round {
-    border-radius: 10px;
-}
-
 .font-retro {
     font-family: Outsourced Retro, Roboto, monospace;
 }
 
 .font-title {
     font-family: Roboto, monospace;
+}
+
+/* Colors */
+.background-color-success-dark {
+    background-color: rgb(198, 225, 208);
+}
+
+.background-color-success-dark-transparent-07 {
+    background-color: rgba(198, 225, 208, 0.7);
+
+}
+
+.background-color-success-light-transparent-05 {
+    background-color: rgba(208, 237, 219, 0.5);
+}
+
+.background-color-success-light-transparent-03 {
+    background-color: rgba(208, 237, 219, 0.3);
+}
+
+
+
+.height-auto {
+    height:auto;
+}
+
+.btn-sm.round {
+    border-radius: 10px;
 }
 
 .rounded-t-5 {
