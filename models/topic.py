@@ -6,7 +6,7 @@ class Topic(db.Model):
     title = db.Column(db.String)
     description = db.Column(db.String)
     author_id = db.Column(db.Integer, db.ForeignKey("users.user_id")) # Note that SQLAlchemy uses plural when creating table names,
-                                                                    # that's why we added users.id in db.ForeignKey()
+                                                                    # that's why we added users.user_id in db.ForeignKey()
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     author = db.relationship("User") # not an SQL table column. It's just a field that describes
                                     # the relationship with another model (User).

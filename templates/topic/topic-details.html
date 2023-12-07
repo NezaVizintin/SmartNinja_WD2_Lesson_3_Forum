@@ -21,10 +21,9 @@
                 <div class="card-body background-color-success-light-transparent-05">
                     <p class="card-text">{{ topic.description }}</p>
                 </div>
-
                 <!-- Edit or delete topic buttons -->
                 <div class="card-footer background-color-success-dark-transparent-07">
-                    {% if user and user.id == topic.author.id %}
+                    {% if user and user.user_id == topic.author.user_id %}
                         <div class="d-flex gap-2">
                             <a href="/topic/{{topic.topic_id}}/topic-edit" type="button" class="btn btn-sm btn-link">Edit</a> |
                             <button type="button" class="btn btn-sm btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
@@ -49,27 +48,27 @@
             {% endfor %}
 
             <!-- New comment form -->
-            <!-- if the user is logged in displays comment input otherwise displays log in link -->
-            {% if user %}
-                <div class="form-outline d-flex justify-content-center text-center mt-5">
-                    <form method="post" class="col-6">
-                        <!-- Input -->
-                        <label for="input-comment" class="form-label">Comment</label>
-                        <textarea name="input-comment" rows="5" class="form-control border mb-3">Enter your message...</textarea>
+            <div class="form-outline d-flex justify-content-center text-center mt-5">
+                <!-- if the user is logged in displays comment input otherwise displays log in link -->
+                {% if user %}
 
-                         <!-- Csrf field -->
-                        <input type="hidden" name="input_csrf" value="{{ csrf_token }}" >
+                        <form method="post" class="col-6">
+                            <!-- Input -->
+                            <label for="input-comment" class="form-label">Comment</label>
+                            <textarea name="input-comment" rows="5" class="form-control border mb-3">Enter your message...</textarea>
 
-                         <!-- Submit button -->
-                        <button type="submit" class="btn btn-success">Submit</button>
-                    </form>
-                </div>
-            <!-- Log in prompt -->
-            {% else %}
-                <h3>Login to comment</h3>
-                <a href="/login" type="button">Login</a>
-            {% endif %}
+                             <!-- Csrf field -->
+                            <input type="hidden" name="input_csrf" value="{{ csrf_token }}" >
 
+                             <!-- Submit button -->
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </form>
+
+                <!-- Log in prompt -->
+                {% else %}
+                    <h3>Login to comment</h3>
+                {% endif %}
+            </div>
         </div>
     </div>
 

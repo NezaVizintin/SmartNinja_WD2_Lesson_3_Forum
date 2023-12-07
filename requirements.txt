@@ -5,3 +5,4 @@ smartninja_redis
 requests
 Werkzeug==2.2.2
 bcrypt
+gunicorn==19.9.0 #za web server
